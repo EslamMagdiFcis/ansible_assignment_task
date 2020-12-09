@@ -37,10 +37,3 @@ def free_memory_percentage():
 
 def cpu_percentage():
     return psutil.cpu_percent()
-
-
-# if __name__ == '__main__':
-    # # sys.exit(cpu_percentage())
-    # print(cpu_percentage())
-    # print(free_memory_percentage())
-    # print(disk_availiable_space_percentage())
