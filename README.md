@@ -12,20 +12,14 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them
 
-```
 [installing and using KVM to prepare server on localhost workstation](https://youtu.be/G95cPAR5TEs)
 install KVM on CentOS
 create vms to be server
-```
 
-```
 [OpenSSH Overview & Setup required for Ansible to work](https://youtu.be/-Q4T9wLsvOQ)
-```
 
 
-```
 [Installing Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-```
 
 
 ## Running the tests
