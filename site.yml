@@ -1,0 +1,54 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+    
+    - name: install updates (CentOS)
+      tags: always
+      yum:
+        update_only: yes
+        update_cache: yes
+      when: ansible_distribution == "CentOS" 
+
+
+    - name: install linux packages required for python
+      yum: 
+        name: "gcc, python3-devel, python3-pip"
+        state: latest
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: copy mointer_system_resources directory to server
+    copy:
+      src: mointer_system_resources
+      dest: $HOME
+      owner: root
+      group: root
+      mode: 0644
+
+  # I face problem with pip module
+  # - name: Install psutil
+  #   pip:
+  #     name: psutil
+  
+  - name: Execute the command in remote shell; Install psutil python package using pip on the remote
+    shell: "pip3 install psutil"
+
+  - name: Ensure a job that runs every 15 minutes. Write new record about system utilits
+    cron:
+      name: "run cron job every 15 min"
+      minute: "*/15"
+      job: "python3 /root/mointer_system_resources/write_sys_resources_utilits_to_disk.py"
+  
+  - name: install some Linux packages passed as parameters
+    yum:
+      name: "{{ list_of_packages }}"
+      state: latest
+
+  - name: Install Java OpenJDK 11
+    package:
+      name: "java-11-openjdk-devel"
+  
